@@ -43,9 +43,9 @@ public class TeacherController {
 	@GetMapping("/getTeachers")
 	public List<Teacher> getTeachers() 
 	{
-		throw new ApiRequestException("An error occurred. CUSTOM EXCEPTION HANDLING SUCCESSFUL.");
-//		List<Teacher> allTeachers = teacherService.getTeachers();
-//		return allTeachers;
+//		throw new ApiRequestException("An error occurred. CUSTOM EXCEPTION HANDLING SUCCESSFUL.");
+		List<Teacher> allTeachers = teacherService.getTeachers();
+		return allTeachers;
 	}
 	
 	@GetMapping("/getTeachersByPaging/{pageNumber}")
@@ -57,9 +57,17 @@ public class TeacherController {
 	
 	@GetMapping("getTeacherById/{id}")
 	public Teacher getTeacherById(@PathVariable int id)
-	{
+	{		
 		Teacher teacherByIdTeacher = teacherService.getTeacherById(id);
-		return teacherByIdTeacher;
+		
+		if(teacherByIdTeacher == null) 
+		{
+			throw new ApiRequestException("An error occurred. CUSTOM EXCEPTION HANDLING SUCCESSFUL.");
+		}
+		else 
+		{
+			return teacherByIdTeacher;
+		}
 	}
 	
 	@GetMapping("getTeacherByName/{name}")

@@ -65,9 +65,18 @@ public class TeacherService {
 	}
 
 	public Teacher getTeacherById(int id) {
-		Teacher teacherById = teacherRepository.findById(id).get();
+		if(teacherRepository.findById(id).get().equals(null)) 
+		{
+			Teacher teacherById = null;
+			return teacherById;
+		}
+		else
+		{
+			Teacher teacherById = teacherRepository.findById(id).get();
+			return teacherById;
+		}
 //		Optional<Teacher> teacherById = teacherRepository.findById(id);
-		return teacherById;
+		
 	}
 	
 	public Teacher getTeacherByName(String name) {
